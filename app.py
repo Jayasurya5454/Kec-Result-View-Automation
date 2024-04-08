@@ -1,3 +1,4 @@
+import apt
 import streamlit as st
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -9,7 +10,25 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import base64
 
+# Function to install Google Chrome using python-apt
+def install_chrome():
+    # Create an instance of the apt Cache
+    cache = apt.Cache()
 
+    # Update the package lists
+    cache.update()
+
+    # Install Google Chrome
+    chrome_pkg = cache['google-chrome-stable']
+    if chrome_pkg.is_installed:
+        print("Google Chrome is already installed.")
+    else:
+        chrome_pkg.mark_install()
+
+    # Commit the changes
+    cache.commit()
+
+# Function to extract table content from HTML
 def extract_table_content(table):
     rows = table.find_all('tr')
     table_data = []
@@ -100,4 +119,5 @@ def main():
         st.markdown(get_download_link(output_text, 'output_data.txt'), unsafe_allow_html=True)
 
 if __name__ == "__main__":
+    install_chrome()  # Install Chrome before running the Streamlit app
     main()
