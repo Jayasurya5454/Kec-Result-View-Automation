@@ -8,8 +8,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import base64
+import chromedriver_autoinstaller
 
-
+# Function to extract table content from HTML
 def extract_table_content(table):
     rows = table.find_all('tr')
     table_data = []
@@ -98,3 +99,10 @@ def main():
         st.text_area("Output", value=output_text, height=600)
 
         st.markdown(get_download_link(output_text, 'output_data.txt'), unsafe_allow_html=True)
+
+# Install ChromeDriver
+chromedriver_autoinstaller.install()
+
+# Run Streamlit app
+if __name__ == "__main__":
+    main()
