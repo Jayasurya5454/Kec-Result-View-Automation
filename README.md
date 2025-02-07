@@ -33,7 +33,7 @@ KEC Result View Automation is a tool designed to simplify the process of retriev
 
 2. Run the application:
    ```bash
-   python app.py
+   streamlit run app.py
    ```
 
 3. Upload the CSV file when prompted.
